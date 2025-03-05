@@ -3,7 +3,7 @@ import ast
 import json
 
 from ExcelSWAPIClient import ExcelSWAPIClient
-from FetchClass import SWAPIClient
+from SWAPIClient import SWAPIClient
 from Processors.FilmsProcessor import FilmsProcessor
 from Processors.PeopleProcessor import PeopleProcessor
 from Processors.PlanetsProcessor import PlanetsProcessor

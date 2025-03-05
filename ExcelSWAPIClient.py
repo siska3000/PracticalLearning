@@ -1,21 +1,19 @@
 import pandas as pd
 import logging
 
-from FetchClass import SWAPIClient
+from DataProviderInterface import DataProviderInterface
+from SWAPIClient import SWAPIClient
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
-class ExcelSWAPIClient(SWAPIClient):
+class ExcelSWAPIClient(DataProviderInterface):
     def __init__(self, path: str):
-        """
-        Ініціалізація з шляхом до Excel-файлу.
-        """
-        super().__init__(path)
+        self.path = path
         self.data = pd.read_excel(path, sheet_name=None)
 
-    def fetch_json(self, endpoint: str) -> list:
+    def fetch_data(self, endpoint: str) -> list:
         """
         Завантажує дані з Excel-файлу для вказаного endpoint.
 

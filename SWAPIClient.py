@@ -1,15 +1,17 @@
 import requests
 import logging
 
+from DataProviderInterface import DataProviderInterface
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
-class SWAPIClient:
+class SWAPIClient(DataProviderInterface):
     def __init__(self, base_url: str):
         self.base_url = base_url
 
-    def fetch_json(self, endpoint: str) -> list:
+    def fetch_data(self, endpoint: str) -> list:
 
         all_data = []
         url = self.base_url + endpoint

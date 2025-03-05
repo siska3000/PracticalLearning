@@ -1,7 +1,8 @@
 import logging
 import pandas as pd
 
-from FetchClass import SWAPIClient
+from DataProviderInterface import DataProviderInterface
+from SWAPIClient import SWAPIClient
 from interfaces import DataFetcher, DataProcessor, DataSaver
 
 
@@ -10,13 +11,13 @@ logger = logging.getLogger(__name__)
 
 
 class SWAPIDataManager(DataFetcher, DataProcessor, DataSaver):
-    def __init__(self, client: SWAPIClient):
+    def __init__(self, client: DataProviderInterface):
         self.client = client
         self.df_list = {}
         self.processors = {}
 
     def fetch_entity(self, endpoint: str):
-        raw_data = self.client.fetch_json(endpoint)
+        raw_data = self.client.fetch_data(endpoint)
 
         if endpoint in self.processors:
             processor = self.processors[endpoint]
