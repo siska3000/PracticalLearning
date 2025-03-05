@@ -18,15 +18,12 @@ class SWAPIClient:
 
             logger.info(f"Отримання даних з: {url}")
 
-            # Отримання даних з API
             response = requests.get(url)
-            response.raise_for_status()  # Генерувати помилку для невдалих відповідей
+            response.raise_for_status()
             data = response.json()
 
-            # Додавання результатів до списку
             all_data.extend(data['results'])
 
-            # Перехід до наступної сторінки
             url = data.get('next')
 
         return all_data
