@@ -3,10 +3,17 @@ import ast
 import json
 
 from FetchClass import SWAPIClient
+from Processors.FilmsProcessor import FilmsProcessor
+from Processors.PeopleProcessor import PeopleProcessor
+from Processors.PlanetsProcessor import PlanetsProcessor
 from SWAPIDataManager import SWAPIDataManager
 
 client = SWAPIClient(base_url="https://swapi.dev/api/")
 manager = SWAPIDataManager(client)
+
+manager.register_processor("people", PeopleProcessor())
+manager.register_processor("planets", PlanetsProcessor())
+manager.register_processor("films", FilmsProcessor())
 
 parser = argparse.ArgumentParser(description='My simple echo')
 parser.add_argument('--endpoint', '-e', help='Text before', default='people,planets')

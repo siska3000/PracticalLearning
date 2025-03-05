@@ -1,6 +1,7 @@
 import logging
 import pandas as pd
 
+from Processors.EntityProcesor import EntityProcessor
 from FetchClass import SWAPIClient
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -11,6 +12,10 @@ class SWAPIDataManager:
     def __init__(self, client: SWAPIClient):
         self.client = client
         self.df_list = {}
+        self.processors = {}
+
+    def register_processor(self, endpoint: str, processor: EntityProcessor):
+        self.processors[endpoint] = processor
 
     def fetch_entity(self, endpoint: str):
         raw_data = self.client.fetch_json(endpoint)
